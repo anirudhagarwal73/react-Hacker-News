@@ -1,0 +1,73 @@
+#logo{
+  max-width:60%;
+ }
+
+.sno{
+  float:left;
+  font-size: 15px;
+}
+
+.content{
+  float:left;
+  font-size: 15px;
+}
+.sidebar-wrapper{
+  font-size: 15px;
+}
+.post-link:link {
+    color: #337ab7;
+    text-decoration: none;
+}
+.post-link:visited {
+    color: #337ab7;
+    text-decoration: none;
+}
+.post-link:hover {
+    color: #337ab7;
+    text-decoration: none;
+}
+.post-link:active {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+.modal-body{
+  padding:0;
+}
+.title{
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 15pt;
+
+}
+.subtext{
+  color: #828282;
+}
+.votelinks{
+  padding-right: 3px;
+}
+.spacer{
+  height:20px;
+}
+.votearrow{
+  width: 20px;
+  height: 15px;
+  border: 0px;
+  margin: 7px 10px 5px;
+  background: url("../images/uparrow.gif") no-repeat;
+}
+.sub-row{
+  margin-left: 11px;
+  margin-bottom: 10px;
+}
+#overlay1{
+position:fixed;
+z-index:99999;
+top:0;
+left:250px;
+bottom:0;
+right:0;
+background:white  ;
+}
+#loader{
+  margin-top:22%;
+}

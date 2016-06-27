@@ -1,0 +1,23 @@
+{
+  "name": "react-hacker-news",
+  "version": "1.0.0",
+  "description": "This app is build using NodeJS (with ExpressJS Framework) and using bootstrap & ReactJS on the front-end.The app uses hacker news API provided by Y Combinator Hacker News to show all the latest hacker news.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anirudhagarwal73/react-Hacker-News.git"
+  },
+  "author": "Anirudh Agarwal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anirudhagarwal73/react-Hacker-News/issues"
+  },
+  "homepage": "https://github.com/anirudhagarwal73/react-Hacker-News#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "serve-favicon": "^2.3.0"
+  }
+}
