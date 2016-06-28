@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/anirudhagarwal73/react-Hacker-News#readme",
   "dependencies": {
+    "body-parser": "^1.15.2",
+    "concat-stream": "^1.5.1",
     "express": "^4.14.0",
     "serve-favicon": "^2.3.0"
   }

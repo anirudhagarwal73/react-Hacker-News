@@ -11,6 +11,9 @@
   float:left;
   font-size: 15px;
 }
+#content-page{
+  padding-left: 250px;
+}
 .sidebar-wrapper{
   font-size: 15px;
 }
