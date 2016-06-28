@@ -1,6 +1,6 @@
 var storiesID=[];
 var storiesCount=0;
-
+var finished=0;
 var Img=React.createClass({
   render:function(){
     return (
@@ -20,6 +20,9 @@ var Heading2=React.createClass({
 var AnchorTag=React.createClass({
   handleClick:function(e){
     e.preventDefault();
+    if(finished==0){
+      return;
+    }
     $('#top').css({"background-color": "", "color": "#999999"});
     $('#new').css({"background-color": "", "color": "#999999"});
     $('#best').css({"background-color": "", "color": "#999999"});
@@ -28,6 +31,7 @@ var AnchorTag=React.createClass({
     $('#'+e.target.id).css({"background-color": "#fff", "color": "black"});
     $( "#overlay1" ).fadeIn( "slow");
     var myUrl=e.target.id+'stories';
+    finished=0;
     component.componentWillReceiveProps('/'+myUrl);
   },
   render:function(){
@@ -69,11 +73,17 @@ var List=React.createClass({
 });
 
 var Sidebar=React.createClass({
+  handleClick:function(e){
+    e.preventDefault();
+    $("#menu-toggle").fadeIn("slow");
+    $("#menu-toggle1").fadeOut("fast");
+    $("#wrapper").toggleClass("toggled");
+  },
   render:function(){
     return (
       <div id="sidebar-wrapper">
         <List/>
-        <a href="" className="btn btn-default affix" data-spy="affix" id="menu-toggle1"><span className="glyphicon glyphicon-list"></span> Close</a>
+        <a href="" className="btn btn-default affix" data-spy="affix" id="menu-toggle1" onClick={() => this.handleClick(event)}><span className="glyphicon glyphicon-list"></span> Close</a>
       </div>
     );
   }
@@ -92,12 +102,18 @@ var Overlay1=React.createClass({
 });
 
 var PageContent=React.createClass({
+  handleClick:function(e){
+    e.preventDefault();
+    $("#menu-toggle").fadeOut("slow");
+    $("#menu-toggle1").fadeIn("fast");
+    $("#wrapper").toggleClass("toggled");
+  },
   render:function(){
     return (
       <div id="page-content-wrapper">
         <Overlay1/>
         <Heading2 content=" Welcome to Hacker News"/>
-        <a href="#menu-toggle" className="btn btn-default affix" data-spy="affix" id="menu-toggle"><span className="glyphicon glyphicon-list"></span> Menu</a>
+        <a href="#menu-toggle" className="btn btn-default affix" data-spy="affix" id="menu-toggle" onClick={() => this.handleClick(event)}><span className="glyphicon glyphicon-list"></span> Menu</a>
         <br/>
         <div className="container" id="post-list">
         </div>
@@ -109,7 +125,7 @@ var PageContent=React.createClass({
 var Page=React.createClass({
   render:function(){
     return (
-      <div className="wrapper">
+      <div id="wrapper">
         <Sidebar/>
         <div id="content-page">
           <PageContent/>
@@ -142,15 +158,21 @@ var NewsBox = React.createClass({
   },
   loadPosts: function(s,end){
     console.log(s);
-    if(s>=end){
+    if(s>=storiesCount){
+      $("#more").html("No More...");
+      finished=1;
       return;
     }
-    if(s>=storiesCount){
+    if(s>=end){
+      finished=1;
       return;
     }
     var outputArray=[];
     var ids=[];
     var e=s+5;
+    if(s+5>=storiesCount)
+      e=storiesCount;
+    console.log(e+" "+storiesCount);
     var timeDiff=this.getTimeDiff;
     for(var i=s;i<e;i++)
       ids.push(storiesID[i]);
@@ -161,10 +183,13 @@ var NewsBox = React.createClass({
           objJSON.time=timeDiff(objJSON.time);
           outputArray.push(objJSON);
         });
-        for(var j=0;j<5;j++){
-          this.state.html.push(outputArray[j]);
+        for(var j=s;j<e;j++){
+          this.state.html.push(outputArray[j-s]);
         }
         this.forceUpdate();
+        if(s==5){
+          $( "#overlay1" ).fadeOut( "slow");
+        }
         this.loadPosts(s+5,end);
       }
     }.bind(this));
@@ -183,6 +208,8 @@ var NewsBox = React.createClass({
   },
   componentDidMount: function() {
     $('#top').css({"background-color": "#fff", "color": "black"});
+
+
     this.ajaxCall(this.props.source);
   },
   componentWillUnmount: function() {
@@ -193,7 +220,6 @@ var NewsBox = React.createClass({
     this.ajaxCall(nextProps);
   },
   render: function() {
-    $( "#overlay1" ).fadeOut( "slow");
     if(this.state.html.length==0){
       return (
         <div className="posts">

@@ -1,7 +1,9 @@
 #logo{
   max-width:60%;
  }
-
+#more{
+  margin-left: -200px;
+}
 .sno{
   float:left;
   font-size: 15px;
@@ -10,9 +12,6 @@
 .content{
   float:left;
   font-size: 15px;
-}
-#content-page{
-  padding-left: 250px;
 }
 .sidebar-wrapper{
   font-size: 15px;
